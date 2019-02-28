@@ -20,4 +20,6 @@ RUN pip install gunicorn
 EXPOSE 8000
 WORKDIR /opt
 
-# TODO: set entrypoint and command (see entrypoint.sh)
+# set entrypoint and command (see entrypoint.sh)
+ENTRYPOINT ["/opt/entrypoint.sh"]  # Use entrypoint script
+CMD ["--start-service"]  # Default parameters to start the service
