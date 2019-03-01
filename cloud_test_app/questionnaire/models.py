@@ -37,3 +37,6 @@ class FilledQuestionnaire(models.Model):
 
     month = models.IntegerField(choices=MONTHS, default=JAN)
     day = models.IntegerField(choices=DAYS, default=MON)
+
+    def __str__(self):
+         return f"{MONTHS_DICT[self.month]}, {DAYS_DICT[self.day]}"
