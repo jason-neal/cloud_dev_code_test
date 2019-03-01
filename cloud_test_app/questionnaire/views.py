@@ -38,8 +38,14 @@ def results(request):
     FQ_model = FilledQuestionnaire
     num_answers = FilledQuestionnaire.objects.count()
 
+    # Find months and days in database to reduce iterations.
+    months_in_db = [model_result["month"] for model_result in
+                    FQ_model.objects.values("month").distinct().order_by("month")]
+    days_in_db = [model_result["day"] for model_result in
+                    FQ_model.objects.values("day").distinct().order_by("day")]
+
     month_results = []
-    for month_num in range(1, 13):
+    for month_num in months_in_db:
         month_count = FQ_model.objects.filter(month=month_num).count()
         if month_count != 0:
             month_frac = month_count/num_answers
@@ -49,7 +55,7 @@ def results(request):
             continue
 
     day_results = []
-    for day_num in range(1, 8):
+    for day_num in days_in_db:
         day_count = FQ_model.objects.filter(day=day_num).count()
         if day_count != 0:
             day_frac = day_count/num_answers
@@ -59,7 +65,7 @@ def results(request):
             continue
 
     fav_results = []
-    for month_num in range(1, 13):
+    for month_num in months_in_db:
         # For a given month count the number of ids for each unique day, then order by the frequency.
         ordered_fav_days = FQ_model.objects.filter(month=month_num
             ).values("day"
