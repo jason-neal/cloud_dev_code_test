@@ -72,7 +72,7 @@ This view will need to query for the saved FilledQuestionnaire entries, then do 
 entrypoint.sh is the script that is run when `docker run local/cloud_test` is excecuted. If extra parameters are passed after the repo name i.e. `docker run local/cloud_test param1 param2`.
 The entrypoint.sh script is called with these as `entrypoint.sh param1 param2`.
 
-entrypoint.sh checks the values of the parameter flags. If the `--django-manage` or `--manage-shell` flags are used thye allow for configuring the django settings through djangos `manage.py`.
+entrypoint.sh checks the values of the parameter flags. If the `--django-manage` or `--manage-shell` flags are used they allow for configuring the django settings through djangos `manage.py`.
 
 If `--start-service` or `--hot-reload` flags are given then the `startup_check.py` script is run. If the checks succeeds without failure then gunicorn is started (with auto-reloading for the --hot-reload flag.)
 
