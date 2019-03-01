@@ -18,8 +18,10 @@ def questionnaire(request):
 
         form = QuestionnaireForm(request.POST)
         if form.is_valid():
-           # TODO: Save the data to database model
+           # Save the ModelForm data to the database model.
+           form.save()
            return redirect("index")
+
     else:
         form = QuestionnaireForm()
 
