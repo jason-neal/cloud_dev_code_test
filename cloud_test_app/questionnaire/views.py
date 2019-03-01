@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from questionnaire.models import FilledQuestionnaire
+from questionnaire.forms import QuestionnaireForm
 
 def index(request):
     # Count all the answers in the FilledQuestionnaire database.
@@ -13,7 +14,17 @@ def index(request):
 
 def questionnaire(request):
     # TODO: Add form POST/GET logic
-    return render(request, 'questionnaire/questionnaire.html')
+    if request.method == "POST":
+
+        form = QuestionnaireForm(request.POST)
+        if form.is_valid():
+           # TODO: Save the data to database model
+           redirect('index')
+    else:
+        form = QuestionnaireForm()
+
+    context = {'form': form}
+    return render(request, 'questionnaire/questionnaire.html', context)
 
 
 def results(request):

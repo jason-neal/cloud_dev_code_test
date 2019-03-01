@@ -3,18 +3,26 @@
 {% block body_content %}
 <div class="container main-body">
 
-  <div class="index-main">
+  <div class="questionnaire-main">
     <h1 class="index-heading">Simple Questionnaire</h1>
-    <p>
-      My favourite month.
-    </p>
-     <!--TODO: add month dropdown-->
-     <p>
-      My favourite day of the week.
-    </p>
-      <!--TODO: add day dropdown-->
+    <form action="" method="post">
+      {% csrf_token %}
+      <p>
+        <label for="id_month">My favourite month.</label>
+        <br />
+        <!--TODO: add month dropdown-->
+        <input id="month" type="text" name="month" maxlength="10" required>
+      </p>
+
+      <p>
+        <label for="id_day"> My favourite day of the week.</label>
+        <br />
+        <!--TODO: add day dropdown-->
+        <input id="day" type="text" name="day" maxlength="10" required>
+      </p>
     
-      <!--TODO: add submit button-->
+      <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
   </div>
 </div>
 {% endblock %}
