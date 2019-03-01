@@ -7,7 +7,7 @@ from questionnaire.models import DAYS_DICT, MONTHS_DICT
 
 def index(request):
     # Count all the answers in the FilledQuestionnaire database.
-    num_answers = FilledQuestionnaire.objects.all().count()
+    num_answers = FilledQuestionnaire.objects.count()
     context = {
         'title': "Basic Questions!",
         'num_answers': num_answers,
@@ -36,7 +36,7 @@ def results(request):
     # TODO: Fill out database and result logic here
     # Temporary values
     FQ_model = FilledQuestionnaire
-    num_answers = FilledQuestionnaire.objects.all().count()
+    num_answers = FilledQuestionnaire.objects.count()
 
     month_results = []
     for month_num in range(1, 13):
