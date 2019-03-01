@@ -14,7 +14,8 @@ MONTHS= ((JAN, "January"),
          (OCT, "October"),
          (NOV, "November"),
          (DEC, "December"),
-         )
+        )
+MONTHS_DICT = {key:value for (key, value) in MONTHS}
 
 MON, TUE, WED, THU, FRI, SAT, SUN = 1, 2, 3, 4, 5, 6, 7
 DAYS = ((MON, "Monday"),
@@ -23,8 +24,9 @@ DAYS = ((MON, "Monday"),
         (THU, "Thursday"),
         (FRI, "Friday"),
         (SAT, "Saturday"),
-        (SUN, "Sunday"), )
-
+        (SUN, "Sunday"),
+       )
+DAYS_DICT = {key:value for (key, value) in DAYS}
 
 class FilledQuestionnaire(models.Model):
     """FilledQuestionnaire model for cloud_test app.

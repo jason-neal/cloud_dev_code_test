@@ -1,6 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect, render
 from questionnaire.models import FilledQuestionnaire
 from questionnaire.forms import QuestionnaireForm
+from questionnaire.models import DAYS_DICT, MONTHS_DICT
+
 
 def index(request):
     # Count all the answers in the FilledQuestionnaire database.
@@ -32,10 +34,29 @@ def questionnaire(request):
 def results(request):
     # TODO: Fill out database and result logic here
     # Temporary values
-    month_results = ["February: 1 (11.1%)",
-                     "March: 1 (11.1%)"]
-    day_results = ["Monday: 1 (11.1%)",
-                   "Tuesday: 1 (11.1%)"]
+    FQ_model = FilledQuestionnaire
+    num_answers = FilledQuestionnaire.objects.all().count()
+
+    month_results = []
+    for month_num in range(1, 13):
+        month_count = FQ_model.objects.filter(month=month_num).count()
+        if month_count != 0:
+            month_frac = month_count/num_answers
+            month_results.append(
+                 f"{MONTHS_DICT[month_num]:s}: {month_count:d} ({month_frac:3.1%})")
+        else:
+            continue
+
+    day_results = []
+    for day_num in range(1, 8):
+        day_count = FQ_model.objects.filter(day=day_num).count()
+        if day_count != 0:
+            day_frac = day_count/num_answers
+            day_results.append(
+                 f"{DAYS_DICT[day_num]:s}: {day_count:d} ({day_frac:3.1%})")
+        else:
+            continue
+
     fav_results = ["February: Friday",
                    "March: Monday"]
 
