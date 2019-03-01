@@ -10,6 +10,12 @@ def index(request):
     }
     return render(request, 'questionnaire/index.html', context)
 
+
 def questionnaire(request):
     # TODO: Add form POST/GET logic
     return render(request, 'questionnaire/questionnaire.html')
+
+
+def results(request):
+    # TODO: Fill out database and result logic here
+    return render(request, 'questionnaire/results.html')
