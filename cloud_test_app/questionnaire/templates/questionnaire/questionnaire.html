@@ -8,17 +8,14 @@
     <form action="" method="post">
       {% csrf_token %}
       <p>
-        <label for="id_month">My favourite month.</label>
+        My favourite month.
         <br />
-        <!--TODO: add month dropdown-->
-        <input id="month" type="text" name="month" maxlength="10" required>
+        {{form.month}}
       </p>
-
       <p>
-        <label for="id_day"> My favourite day of the week.</label>
+        My favourite day of the week.
         <br />
-        <!--TODO: add day dropdown-->
-        <input id="day" type="text" name="day" maxlength="10" required>
+        {{form.day}}
       </p>
     
       <input class="btn btn-primary" type="submit" value="Submit" />
