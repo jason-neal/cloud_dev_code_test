@@ -9,3 +9,7 @@ def index(request):
         'num_answers': num_answers,
     }
     return render(request, 'questionnaire/index.html', context)
+
+def questionnaire(request):
+    # TODO: Add form POST/GET logic
+    return render(request, 'questionnaire/questionnaire.html')
