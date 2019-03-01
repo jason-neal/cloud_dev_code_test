@@ -29,4 +29,16 @@ def questionnaire(request):
 
 def results(request):
     # TODO: Fill out database and result logic here
-    return render(request, 'questionnaire/results.html')
+    # Temporary values
+    month_results = ["February: 1 (11.1%)",
+                     "March: 1 (11.1%)"]
+    day_results = ["Monday: 1 (11.1%)",
+                   "Tuesday: 1 (11.1%)"]
+    fav_results = ["February: Friday",
+                   "March: Monday"]
+
+    context = {"month_results": month_results,
+        "day_results": day_results,
+        "fav_results": fav_results,
+    }
+    return render(request, 'questionnaire/results.html', context)

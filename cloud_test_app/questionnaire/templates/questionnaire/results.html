@@ -3,7 +3,7 @@
 {% block body_content %}
 <div class="container main-body">
 
-  <div class="index-main">
+  <div class="result-main">
     <h1 class="index-heading">Simple Questionnaire</h1>
     <p>
       These are the results for the innane questionnaire.
@@ -13,11 +13,26 @@
     </p>
     <h3>Results</h3>
     <h4>Months</h4>
+    <ul>
+      {% for month_res in month_results|safeseq %}
+          <li>{{ month_res }}</li>
+      {% endfor %}
+      </ul>
     <!--TODO add month results-->
     <h4>Days</h4>
     <!--TODO add day results-->
+    <ul>
+      {% for day_res in day_results|safeseq %}
+          <li>{{ day_res }}</li>
+      {% endfor %}
+      </ul>
     <h4>Fav day related to month</h4>
     <!--TODO add related results-->
+    <ul>
+      {% for fav_res in fav_results|safeseq %}
+          <li>{{ fav_res }}</li>
+      {% endfor %}
+      </ul>
   </div>
 </div>
 {% endblock %}
