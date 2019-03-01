@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import redirect, render
 from questionnaire.models import FilledQuestionnaire
 from questionnaire.forms import QuestionnaireForm
@@ -57,8 +58,19 @@ def results(request):
         else:
             continue
 
-    fav_results = ["February: Friday",
-                   "March: Monday"]
+    fav_results = []
+    for month_num in range(1, 13):
+        # For a given month count the number of ids for each unique day, then order by the frequency.
+        ordered_fav_days = FQ_model.objects.filter(month=month_num
+            ).values("day"
+            ).annotate(day_count=Count("id")
+            ).order_by("-day_count")
+        if len(ordered_fav_days) != 0:
+            fav_day = ordered_fav_days[0]["day"]
+            fav_results.append(
+                 f"{MONTHS_DICT[month_num]:s}: {DAYS_DICT[fav_day] :s}")
+        else:
+            continue
 
     context = {"month_results": month_results,
         "day_results": day_results,
