@@ -66,6 +66,12 @@ This view will need to query for the saved FilledQuestionnaire entries, then do 
 
 #### Explain how the config for this app works, and why when using docker compose might this be a good way to configure rather than a config file
 
+Currently the config for the app needs to be passed in on the command line when starting the container with `docker run`.
+the -p parameter configures or links the port from the container to the host to enable the app to be accessed from the host. The -v option configures a volume (folder) location on the host to mount the container so that the files (code and data) can be shared between the container and host. One feature of this allows for changes in the code to be immediately realized in the container, allowing for faster app development.
+The container to run is also specified, in this case local/cloud_test.
+
+Docker compose allows for these configuration values such as port and volume to be stored in docker-compose.yml, without the need to continually type them in the terminal.
+It also allows for the configuration of multiple containers together, linking any dependencies or interaction, and setting the startup order.
 #### Explain why the startup_check.py file exists and what it does
 
 #### Explain what the entrypoint.sh file does
