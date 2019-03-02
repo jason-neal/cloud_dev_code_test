@@ -72,15 +72,24 @@ The container to run is also specified, in this case local/cloud_test.
 
 Docker compose allows for these configuration values such as port and volume to be stored in docker-compose.yml, without the need to continually type them in the terminal.
 It also allows for the configuration of multiple containers together, linking any dependencies or interaction, and setting the startup order.
+
 #### Explain why the startup_check.py file exists and what it does
 
+The startup_check.py exists to configure, prepare, and check django app before it is started. It runs several django management tasks for the app, retrying the steps multiple times if needed.
+
+It checks if database migrations are needed, either for the first time or due to changes in the django models. It locks the database while the migrations are occurring to prevent other process from accessing the database at the same time.
+It configures the admin superuser with username and password.
+It also collects together the static files for the app.
+
+Only if startup_check.py runs without fail does the app actually get started.
+
 #### Explain what the entrypoint.sh file does
-entrypoint.sh is the script that is run when `docker run local/cloud_test` is excecuted. If extra parameters are passed after the repo name i.e. `docker run local/cloud_test param1 param2`.
+entrypoint.sh is the script that is run when `docker run local/cloud_test` is executed. If extra parameters are passed after the repo name i.e. `docker run local/cloud_test param1 param2`.
 The entrypoint.sh script is called with these as `entrypoint.sh param1 param2`.
 
 entrypoint.sh checks the values of the parameter flags. If the `--django-manage` or `--manage-shell` flags are used they allow for configuring the django settings through djangos `manage.py`.
 
-If `--start-service` or `--hot-reload` flags are given then the `startup_check.py` script is run. If the checks succeeds without failure then gunicorn is started (with auto-reloading for the --hot-reload flag.)
+If `--start-service` or `--hot-reload` flags are given then the `startup_check.py` script is run. If the checks succeeds without failure then Gunicorn is started (with auto-reloading for the --hot-reload flag.)
 
 This allows for different configurations easily from the `docker run` command.
 
